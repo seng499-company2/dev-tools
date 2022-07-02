@@ -1,0 +1,7 @@
+string,string,string,boolean (all caps),boolean (all caps),boolean (all caps),integer,integer (optional)
+semester,code,title,pengRequiredFall,pengRequiredSpring,pengRequiredSummer,yearRequired,capacity
+fall,CSC230,Introduction to Computer Architecture,FALSE,FALSE,FALSE,2,
+fall,SENG360,Security Engineering,TRUE,TRUE,TRUE,3,
+spring,CSC225,Algorithms and Data Structures: I,FALSE,FALSE,FALSE,2,150
+spring,SENG321,Requirements Engineering,TRUE,TRUE,TRUE,3,
+summer,SENG 499,Design Project II,TRUE,TRUE,TRUE,4,110
