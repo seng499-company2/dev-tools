@@ -1,4 +1,5 @@
 # Mock Data Generator
+*Any data stored in the CSV files does not represent real world data.*
 ___
 ### Description
 The purpose of this tool is to take in three CSV files and generate python objects and json files which can be used throughout the project.
