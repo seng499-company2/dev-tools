@@ -1,6 +1,7 @@
 import csv
 import pprint
 import json
+import os
 
 
 # A function to print a python object with a readable structure.
@@ -145,6 +146,8 @@ def process_professor_data(csv_name, preferences_csv_name):
 
 # A function used to generate a json file from a python object.
 def obj_to_json_file(object, output_name):
+    if not(os.path.exists("./output_json_files")):
+        os.mkdir("./output_json_files")
     json_filename = 'output_json_files/' + output_name + '.json'
     with open(json_filename, 'w') as outfile:
         outfile.write(json.dumps(object))
