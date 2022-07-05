@@ -179,7 +179,7 @@ if __name__ == '__main__':
 
     # Convert the professor data CSV and professor preferences CSV to a single python object.
     professor_object = process_professor_data('input_csv_files/professors.csv', 'input_csv_files'
-                                                                                    '/professor_course_preferences.csv')
+                                                                                '/professor_course_preferences.csv')
     # Create a json file from the object.
     obj_to_json_file(professor_object, "professor_object")
     # Print the object with a nicer format.
