@@ -17,13 +17,13 @@ def string_to_bool(string):
 
 
 # Converts the input course data CSV to a python object matching the algorithm spec.
-def process_course_data(csv_name):
+def process_course_data(course_csv_name):
     schedule_object = {
         "fall": [],
         "spring": [],
         "summer": []
     }
-    with open(csv_name) as course_data_csv:
+    with open(course_csv_name) as course_data_csv:
         csv_reader = csv.reader(course_data_csv, delimiter=',')
         next(csv_reader)
         line_count = 0
@@ -34,30 +34,46 @@ def process_course_data(csv_name):
                         "code": row[1],
                         "title": row[2],
                         "pengRequired": {
-                            "fall": string_to_bool(row[3]),
-                            "spring": string_to_bool(row[4]),
-                            "summer": string_to_bool(row[5])
+                            "fall": string_to_bool(row[3]) if row[3] != "" else None,
+                            "spring": string_to_bool(row[4]) if row[4] != "" else None,
+                            "summer": string_to_bool(row[5]) if row[5] != "" else None
                         },
                         "yearRequired": int(row[6])
                     },
                     "sections": [
                         {
-                            "professor": {},
-                            "capacity": int(row[7]) if row[7] != "" else None,
-                            "timeslots": []
+                            "professor": {
+                                "id": int(row[7]) if row[7] != "" else None,
+                                "name": row[8] if row[8] != "" else None
+                            },
+                            "capacity": int(row[9]) if row[9] != "" else None,
+                            "timeslots": parse_timeslots(row[10], row[11]) if row[10] != "" and row[11] != "" else []
                         }
                     ]
                 }
                 schedule_object[row[0]].append(offering)
             line_count += 1
+    return schedule_object
 
-        return schedule_object
+
+def parse_timeslots(days, timeRange):
+    daySpreads = {
+        "TWF": ["TUESDAY", "WEDNESDAY", "FRIDAY"],
+        "MTh": ["MONDAY", "THURSDAY"],
+        "M": ["MONDAY"],
+        "T": ["TUESDAY"],
+        "W": ["WEDNESDAY"],
+        "Th": ["THURSDAY"],
+        "F": ["FRIDAY"]
+    }
+
+    return [{"dayOfWeek": day, "timeRange": parse_time_ranges(timeRange)[0]} for day in daySpreads[days]]
 
 
 # A helper function used to parse the time ranges.
 def parse_time_ranges(time_ranges):
     if time_ranges == "":
-        return []
+        return [None]
     time_range_list = time_ranges.split('&')
     for index, time_range in enumerate(time_range_list):
         split_range = time_range.split('~')
@@ -109,7 +125,7 @@ def parse_course_preferences(preferences_csv_name):
                     preferences[course_names[i - 2]] = row[i]
                 coursePreferences[row[0]] = preferences
             line_count += 1
-        return coursePreferences
+        return coursePreferences if len(coursePreferences) > 0 else None
 
 
 # Converts the input professor data CSV to a python object matching the algorithm spec.
@@ -132,12 +148,12 @@ def process_professor_data(csv_name, preferences_csv_name):
                     "coursePreferences": coursePreferences[row[0]],
                     "preferredTimes": parse_preferred_times(row[5:20]),
                     "preferredCoursesPerSemester": {
-                        "fall": int(row[20]),
-                        "spring": int(row[21]),
-                        "summer": int(row[22])
+                        "fall": int(row[20]) if row[20] != "" else None,
+                        "spring": int(row[21]) if row[21] != "" else None,
+                        "summer": int(row[22]) if row[22] != "" else None
                     },
-                    "preferredNonTeachingSemester": row[23],
-                    "preferredCourseDaySpreads": row[24].split('&')
+                    "preferredNonTeachingSemester": row[23] if row[23] != "" else None,
+                    "preferredCourseDaySpreads": row[24].split('&') if row[24] != "" else None
                 }
                 professors_object.append(professor)
             line_count += 1
@@ -146,24 +162,24 @@ def process_professor_data(csv_name, preferences_csv_name):
 
 # A function used to generate a json file from a python object.
 def obj_to_json_file(object, output_name):
-    if not(os.path.exists("./output_json_files")):
+    if not (os.path.exists("./output_json_files")):
         os.mkdir("./output_json_files")
     json_filename = 'output_json_files/' + output_name + '.json'
     with open(json_filename, 'w') as outfile:
-        outfile.write(json.dumps(object))
+        json.dump(object, outfile, indent=6)
 
 
 if __name__ == '__main__':
     # Convert the course data CSV to a python object.
-    schedule_object = process_course_data('input_csv_files/course_data.csv')
+    schedule_object = process_course_data('input_csv_files/schedule.csv')
     # Create a json file from the object.
     obj_to_json_file(schedule_object, "schedule_object")
     # Print the object with a nicer format.
     pretty_print(schedule_object)
 
     # Convert the professor data CSV and professor preferences CSV to a single python object.
-    professor_object = process_professor_data('input_csv_files/professor_data.csv', 'input_csv_files'
-                                                                                    '/course_preferences.csv')
+    professor_object = process_professor_data('input_csv_files/professors.csv', 'input_csv_files'
+                                                                                    '/professor_course_preferences.csv')
     # Create a json file from the object.
     obj_to_json_file(professor_object, "professor_object")
     # Print the object with a nicer format.
