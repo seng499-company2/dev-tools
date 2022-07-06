@@ -122,7 +122,7 @@ def parse_course_preferences(preferences_csv_name):
             else:
                 preferences = {}
                 for i in range(2, len(row)):
-                    preferences[course_names[i - 2]] = row[i]
+                    preferences[course_names[i - 2]] = int(row[i])
                 coursePreferences[row[0]] = preferences
             line_count += 1
         return coursePreferences if len(coursePreferences) > 0 else None
