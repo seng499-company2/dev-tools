@@ -34,9 +34,9 @@ def process_course_data(course_csv_name):
                         "code": row[1],
                         "title": row[2],
                         "pengRequired": {
-                            "fall": string_to_bool(row[3]) if row[3] != "" else None,
-                            "spring": string_to_bool(row[4]) if row[4] != "" else None,
-                            "summer": string_to_bool(row[5]) if row[5] != "" else None
+                            "fall": string_to_bool(row[3]) if row[3] != "" else False,
+                            "spring": string_to_bool(row[4]) if row[4] != "" else False,
+                            "summer": string_to_bool(row[5]) if row[5] != "" else False
                         },
                         "yearRequired": int(row[6])
                     },
