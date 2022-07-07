@@ -45,7 +45,7 @@ def process_course_data(course_csv_name):
                             "professor": {
                                 "id": int(row[7]) if row[7] != "" else None,
                                 "name": row[8] if row[8] != "" else None
-                            },
+                            } if row[7] != "" and row[8] != "" else None,
                             "capacity": int(row[9]) if row[9] != "" else None,
                             "timeslots": parse_timeslots(row[10], row[11]) if row[10] != "" and row[11] != "" else []
                         }
