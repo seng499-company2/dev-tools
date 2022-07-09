@@ -32,7 +32,7 @@ id,name,isPeng,facultyType,teachingObligations,monday,tuesday,wednesday,thursday
 30,George Tzanetakis,FALSE,research,1,,,,,,,,,,,,,,,,1,0,0,,
 31,Jens Weber,TRUE,teaching,3,,,,,,,,,,,,,,,,0,1,2,,
 32,Kui Wu,TRUE,teaching,6,,,,,,,,,,,,,,,,4,0,2,,
-33,Michael Zastre,TRUE,research,2,,,,,,,,,,,,,,,,2,0,0,,
+33,Michael Zastre,TRUE,research,4,,,,,,,,,,,,,,,,2,0,0,,
 34,Michael Adams,TRUE,teaching,2,,,,,,,,,,,,,,,,1,0,1,,
 35,Panajotis Agathoklis,TRUE,teaching,2,,,,,,,,,,,,,,,,0,1,1,,
 36,Riham AlTawy,TRUE,research,2,,,,,,,,,,,,,,,,1,1,0,,

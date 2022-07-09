@@ -25,33 +25,49 @@ def process_course_data(course_csv_name):
     }
     with open(course_csv_name) as course_data_csv:
         csv_reader = csv.reader(course_data_csv, delimiter=',')
-        next(csv_reader)
+
+        next(csv_reader) # Row 1 Header
+        next(csv_reader) # Row 2 Header
+
         line_count = 0
         for row in csv_reader:
-            if line_count > 0:
-                offering = {
-                    "course": {
-                        "code": row[1],
-                        "title": row[2],
-                        "pengRequired": {
-                            "fall": string_to_bool(row[3]) if row[3] != "" else False,
-                            "spring": string_to_bool(row[4]) if row[4] != "" else False,
-                            "summer": string_to_bool(row[5]) if row[5] != "" else False
-                        },
-                        "yearRequired": int(row[6])
+            sections = []
+
+            # Section 1
+            sections.append({
+                "professor": {
+                    "id": int(row[8]) if row[8] != "" else None,
+                    "name": row[9] if row[9] != "" else None
+                } if row[8] != "" and row[9] != "" else None,
+                "capacity": int(row[10]) if row[10] != "" else None,
+                "timeSlots": parse_timeslots(row[11], row[12]) if row[11] != "" and row[12] != "" else []
+            })
+
+            # Section 2
+            if int(row[7]) > 1:
+                sections.append({
+                    "professor": {
+                        "id": int(row[13]) if row[13] != "" else None,
+                        "name": row[14] if row[14] != "" else None
+                    } if row[13] != "" and row[14] != "" else None,
+                    "capacity": int(row[15]) if row[15] != "" else None,
+                    "timeSlots": parse_timeslots(row[16], row[17]) if row[16] != "" and row[17] != "" else []
+                })
+
+            offering = {
+                "course": {
+                    "code": row[1],
+                    "title": row[2],
+                    "pengRequired": {
+                        "fall": string_to_bool(row[3]) if row[3] != "" else False,
+                        "spring": string_to_bool(row[4]) if row[4] != "" else False,
+                        "summer": string_to_bool(row[5]) if row[5] != "" else False
                     },
-                    "sections": [
-                        {
-                            "professor": {
-                                "id": int(row[7]) if row[7] != "" else None,
-                                "name": row[8] if row[8] != "" else None
-                            } if row[7] != "" and row[8] != "" else None,
-                            "capacity": int(row[9]) if row[9] != "" else None,
-                            "timeslots": parse_timeslots(row[10], row[11]) if row[10] != "" and row[11] != "" else []
-                        }
-                    ]
-                }
-                schedule_object[row[0]].append(offering)
+                    "yearRequired": int(row[6])
+                },
+                "sections": sections
+            }
+            schedule_object[row[0]].append(offering)
             line_count += 1
     return schedule_object
 
