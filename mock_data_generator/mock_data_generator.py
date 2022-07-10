@@ -165,10 +165,10 @@ def process_professor_data(csv_name, preferences_csv_name):
         for row in csv_reader:
             if line_count > 0:
                 professor = {
-                    "id": row[0],
+                    "id": int(row[0]),
                     "name": row[1],
                     "isPeng": string_to_bool(row[2]),
-                    "facultyType": row[3],
+                    "facultyType": row[3].upper(),
                     "teachingObligations": int(row[4]),
                     "coursePreferences": parse_course_prefs_into_list(coursePreferences[row[0]]),
                     "preferredTimes": parse_preferred_times(row[5:20]),
