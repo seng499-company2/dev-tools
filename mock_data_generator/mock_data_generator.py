@@ -177,7 +177,7 @@ def process_professor_data(csv_name, preferences_csv_name):
                         "spring": int(row[21]) if row[21] != "" else None,
                         "summer": int(row[22]) if row[22] != "" else None
                     },
-                    "preferredNonTeachingSemester": row[23] if row[23] != "" else None,
+                    "preferredNonTeachingSemester": row[23].upper() if row[23] != "" else None,
                     "preferredCourseDaySpreads": row[24].split('&') if row[24] != "" else []
                 }
                 professors_object.append(professor)
