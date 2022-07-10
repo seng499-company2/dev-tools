@@ -143,6 +143,12 @@ def parse_course_preferences(preferences_csv_name):
             line_count += 1
         return coursePreferences if len(coursePreferences) > 0 else None
 
+def parse_course_prefs_into_list(course_prefs):
+    prefs_list = []
+    for k, v in course_prefs.items():
+        prefs_list.append({"courseCode": k, "enthusiasmScore": v})
+    
+    return prefs_list
 
 # Converts the input professor data CSV to a python object matching the algorithm spec.
 def process_professor_data(csv_name, preferences_csv_name):
@@ -161,7 +167,7 @@ def process_professor_data(csv_name, preferences_csv_name):
                     "isPeng": string_to_bool(row[2]),
                     "facultyType": row[3],
                     "teachingObligations": int(row[4]),
-                    "coursePreferences": coursePreferences[row[0]],
+                    "coursePreferences": parse_course_prefs_into_list(coursePreferences[row[0]]),
                     "preferredTimes": parse_preferred_times(row[5:20]),
                     "preferredCoursesPerSemester": {
                         "fall": int(row[20]) if row[20] != "" else None,
