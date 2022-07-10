@@ -99,28 +99,31 @@ def parse_time_ranges(time_ranges):
 
 # A helper function used to process preferred times.
 def parse_preferred_times(times):
+    fall = times[0] != "" and times[1] != "" and times[2] != "" and times[3] != "" and times[4] != ""
+    spring = times[5] != "" and times[6] != "" and times[7] != "" and times[8] != "" and times[9] != ""
+    summer = times[10] != "" and times[11] != "" and times[12] != "" and times[13] != "" and times[14] != ""
     preferredTimes = {
         "fall": {
-            "monday": parse_time_ranges(times[0]),
-            "tuesday": parse_time_ranges(times[1]),
-            "wednesday": parse_time_ranges(times[2]),
-            "thursday": parse_time_ranges(times[3]),
-            "friday": parse_time_ranges(times[4])
-        },
+            "monday": parse_time_ranges(times[0]) if times[0] != "" else [],
+            "tuesday": parse_time_ranges(times[1]) if times[1] != "" else [],
+            "wednesday": parse_time_ranges(times[2]) if times[2] != "" else [],
+            "thursday": parse_time_ranges(times[3]) if times[3] != "" else [],
+            "friday": parse_time_ranges(times[4]) if times[4] != "" else []
+        } if fall else None,
         "spring": {
-            "monday": parse_time_ranges(times[5]),
-            "tuesday": parse_time_ranges(times[6]),
-            "wednesday": parse_time_ranges(times[7]),
-            "thursday": parse_time_ranges(times[8]),
-            "friday": parse_time_ranges(times[9])
-        },
+            "monday": parse_time_ranges(times[5]) if times[5] != "" else [],
+            "tuesday": parse_time_ranges(times[6]) if times[6] != "" else [],
+            "wednesday": parse_time_ranges(times[7]) if times[7] != "" else [],
+            "thursday": parse_time_ranges(times[8]) if times[8] != "" else [],
+            "friday": parse_time_ranges(times[9]) if times[9] != "" else []
+        } if spring else None,
         "summer": {
-            "monday": parse_time_ranges(times[10]),
-            "tuesday": parse_time_ranges(times[11]),
-            "wednesday": parse_time_ranges(times[12]),
-            "thursday": parse_time_ranges(times[13]),
-            "friday": parse_time_ranges(times[14])
-        }
+            "monday": parse_time_ranges(times[10]) if times[10] != "" else [],
+            "tuesday": parse_time_ranges(times[11]) if times[11] != "" else [],
+            "wednesday": parse_time_ranges(times[12]) if times[12] != "" else [],
+            "thursday": parse_time_ranges(times[13]) if times[13] != "" else [],
+            "friday": parse_time_ranges(times[14]) if times[14] != "" else []
+        } if summer else None
     }
     return preferredTimes
 
@@ -175,7 +178,7 @@ def process_professor_data(csv_name, preferences_csv_name):
                         "summer": int(row[22]) if row[22] != "" else None
                     },
                     "preferredNonTeachingSemester": row[23] if row[23] != "" else None,
-                    "preferredCourseDaySpreads": row[24].split('&') if row[24] != "" else None
+                    "preferredCourseDaySpreads": row[24].split('&') if row[24] != "" else []
                 }
                 professors_object.append(professor)
             line_count += 1
