@@ -1,4 +1,4 @@
-string,string,string,boolean (optional),boolean (optional),boolean (optional),integer,integer ( 1 or 2),int (optional),string (optional),integer (optional),"enum(""TWF"", ""MTh"", ""M"", ""T"", ""W"", ""Th"", ""F"") (optional)",custom (optional),int (optional),string (optional),integer (optional will be used for multiple section generation),"enum(""TWF"", ""MTh"", ""M"", ""T"", ""W"", ""Th"", ""F"") (optional)",custom (optional)
+string,string,string,boolean (optional),boolean (optional),boolean (optional),integer,integer ( 1 or 2),string (optional),string (optional),integer (optional),"enum(""TWF"", ""MTh"", ""M"", ""T"", ""W"", ""Th"", ""F"") (optional)",custom (optional),string (optional),string (optional),integer (optional will be used for multiple section generation),"enum(""TWF"", ""MTh"", ""M"", ""T"", ""W"", ""Th"", ""F"") (optional)",custom (optional)
 semester,code,title,pengRequired.fall,pengRequired.spring,pengRequired.summer,yearRequired,numberOfSections,professor.id,professor.name,capacity,days (will be used to create dayOfTheWeek),timeRange (start and end separated by ~),professor.id,professor.name,capacity,days (will be used to create dayOfTheWeek),timeRange (start and end separated by ~)
 fall,CSC111,Fundamentals of Programming with Engineering Applications,TRUE,TRUE,,1,2,,,140,,,,,60,,
 spring,CSC111,Fundamentals of Programming with Engineering Applications,TRUE,TRUE,,1,2,,,120,,,,,80,,
@@ -9,8 +9,6 @@ fall,CSC230,Introduction to Computer Architecture,TRUE,FALSE,FALSE,2,2,,,140,,,,
 spring,CSC230,Introduction to Computer Architecture,TRUE,FALSE,FALSE,2,2,,,60,,,,,60,,
 summer,CSC230,Introduction to Computer Architecture,TRUE,FALSE,FALSE,2,2,,,140,,,,,100,,
 fall,ECE255,Introduction to Computer Architecture,FALSE,FALSE,FALSE,2,2,,,140,,,,,120,,
-spring,ECE255,Introduction to Computer Architecture,FALSE,FALSE,FALSE,2,2,,,140,,,,,100,,
-summer,ECE255,Introduction to Computer Architecture,FALSE,FALSE,FALSE,2,2,,,100,,,,,100,,
 fall,ECE260,Continuous-Time Signals and Systems,FALSE,,FALSE,2,2,,,80,,,,,60,,
 summer,ECE260,Continuous-Time Signals and Systems,FALSE,,FALSE,2,2,,,120,,,,,60,,
 fall,SENG265,Software Development Methods,TRUE,FALSE,FALSE,2,2,,,140,,,,,120,,
@@ -26,7 +24,6 @@ summer,SENG275,Software Testing,,TRUE,TRUE,2,2,,,60,,,,,120,,
 fall,SENG310,Human Computer Interaction,TRUE,TRUE,TRUE,2,2,,,80,,,,,120,,
 spring,SENG310,Human Computer Interaction,TRUE,TRUE,TRUE,2,2,,,80,,,,,80,,
 summer,SENG310,Human Computer Interaction,TRUE,TRUE,TRUE,2,2,,,140,,,,,100,,
-fall,ECE458,Communication Networks,FALSE,FALSE,,3,2,,,100,,,,,60,,
 spring,ECE458,Communication Networks,FALSE,FALSE,,3,2,,,100,,,,,120,,
 fall,CSC361,Computer Communications and Networks,FALSE,TRUE,,3,2,,,60,,,,,120,,
 spring,CSC361,Computer Communications and Networks,FALSE,TRUE,,3,2,,,100,,,,,120,,

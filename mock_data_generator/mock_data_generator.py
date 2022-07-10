@@ -36,7 +36,7 @@ def process_course_data(course_csv_name):
             # Section 1
             sections.append({
                 "professor": {
-                    "id": int(row[8]) if row[8] != "" else None,
+                    "id": row[8] if row[8] != "" else None,
                     "name": row[9] if row[9] != "" else None
                 } if row[8] != "" and row[9] != "" else None,
                 "capacity": int(row[10]) if row[10] != "" else None,
@@ -47,7 +47,7 @@ def process_course_data(course_csv_name):
             if int(row[7]) > 1:
                 sections.append({
                     "professor": {
-                        "id": int(row[13]) if row[13] != "" else None,
+                        "id": row[13] if row[13] != "" else None,
                         "name": row[14] if row[14] != "" else None
                     } if row[13] != "" and row[14] != "" else None,
                     "capacity": int(row[15]) if row[15] != "" else None,
@@ -165,7 +165,7 @@ def process_professor_data(csv_name, preferences_csv_name):
         for row in csv_reader:
             if line_count > 0:
                 professor = {
-                    "id": int(row[0]),
+                    "id": row[0],
                     "name": row[1],
                     "isPeng": string_to_bool(row[2]),
                     "facultyType": row[3].upper(),
