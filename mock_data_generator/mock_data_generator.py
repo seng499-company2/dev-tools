@@ -99,9 +99,9 @@ def parse_time_ranges(time_ranges):
 
 # A helper function used to process preferred times.
 def parse_preferred_times(times):
-    fall = times[0] != "" and times[1] != "" and times[2] != "" and times[3] != "" and times[4] != ""
-    spring = times[5] != "" and times[6] != "" and times[7] != "" and times[8] != "" and times[9] != ""
-    summer = times[10] != "" and times[11] != "" and times[12] != "" and times[13] != "" and times[14] != ""
+    fall = times[0] != "" or times[1] != "" or times[2] != "" or times[3] != "" or times[4] != ""
+    spring = times[5] != "" or times[6] != "" or times[7] != "" or times[8] != "" or times[9] != ""
+    summer = times[10] != "" or times[11] != "" or times[12] != "" or times[13] != "" or times[14] != ""
     preferredTimes = {
         "fall": {
             "monday": parse_time_ranges(times[0]) if times[0] != "" else [],
